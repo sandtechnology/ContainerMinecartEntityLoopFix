@@ -15,12 +15,11 @@ To explain its process, it's need to explain how chunk unloading working:
       3. ...
 
 The problem is happened there, it uses the same method which use to remove entity normally (like kill, break action), 
-so there is no way to know if this entity was removed due to chunk loading from its side, so entity will do the normal logic like it was, 
+so there is no way to know if this entity was removed due to chunk unloading from its side, so entity will does the normal logic, 
 in vanilla, it's okay since all the changes just happened in memory and chunk has been saved to disk, but in modded server,
  this can be a big problem.
 
-For Minecart which having container, it will drop items in its container when it was broke or killed, so does it in unloading,
- what if a mod getting block or entity in this chunk this time? It will cause chunk load for unloading chunk, so a perfect dead loop raised and will nearly kill your server, but lucky, this is not a silent kills, it will also raise log spam for duplicated uuid in minecraft:item like that:
+For Minecart which having container, it will drop items in its container when it was broke or killed, so does it in unloading, what if a mod getting block or entity in this chunk this time? It will cause chunk load for unloading chunk, so a perfect dead loop raised and will nearly kill your server, but lucky, this is not a silent kills, it will also raise log spam for duplicated uuid in minecraft:item like that:
 ```
 
 [Server thread/WARN] [net.minecraft.world.server.ServerWorld/]: Trying to add entity with duplicated UUID 68e9dfd6-b738-459f-87df-f2227281f1bf. Existing minecraft:item#3732, new: minecraft:item#3760
@@ -30,6 +29,6 @@ For Minecart which having container, it will drop items in its container when it
 [Server thread/WARN] [net.minecraft.world.server.ServerWorld/]: Trying to add entity with duplicated UUID cc604267-9eac-4b14-925c-786a0d622ea2. Existing minecraft:item#3599, new: minecraft:item#3796
 
 ```
-It's because the entity UUID used by minecraft is using insecure random, and it's seed is time based, so is the race for the entity created at the nearly same time.
+It's because the entity UUID used by minecraft is using insecure random, and it's seed is time based, so its uuid could be the same for the entites created at the nearly same time.
 
-This mod simply prevent it from dropping items when unloading such entity, but more case like that may happen in other mod, in this case, please report to it's author to let them fix it.
+This mod simply prevent it by stop dropping items when unloading such entity, but more case like that may happen in other mod entity, in this case, please report to it's author to let them fix it.
