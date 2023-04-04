@@ -1,0 +1,9 @@
+{
+    "pack": {
+        "description": "containerminecartentityloopfix resources",
+                "pack_format": 6,
+        "_comment": "A pack_format of 6 requires json lang files and some texture changes from 1.16.2. Note: we require v6 pack meta for all mods."
+                        ,"forge:resource_pack_format": ${FORGE_DATA.resourcePackFormat},
+        "forge:data_pack_format": ${FORGE_DATA.dataPackFormat}
+            }
+}
