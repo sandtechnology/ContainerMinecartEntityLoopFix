@@ -16,7 +16,7 @@ plugins {
 apply plugin: 'org.spongepowered.mixin'
 
 group = 'com.github.sandtechnology'
-version = '1.0-SNAPSHOT'
+version = '1.1'
 
 java {
     archivesBaseName = 'ContainerMinecartEntityLoopFix'

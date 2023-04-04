@@ -15,5 +15,6 @@ public class ServerWorldMixin {
             //In this time chunk was saved, so this change just happen on runtime and not persisted
             ((ContainerMinecartEntity) entityForUnloading).dropContentsWhenDead(false);
         }
+        instance.onEntityRemoved(entityForUnloading);
     }
 }
